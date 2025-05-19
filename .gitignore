@@ -1,0 +1,31 @@
+# Node modules (client and server)
+node_modules/
+
+# Build output (client and server)
+dist/
+build/
+.out/
+.next/
+coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Mac system files
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# OS trash
+.Trashes
