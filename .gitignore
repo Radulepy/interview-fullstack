@@ -1,6 +1,9 @@
 # Node modules (client and server)
 node_modules/
 
+server/node_modules/
+client/node_modules/
+
 # Build output (client and server)
 dist/
 build/
