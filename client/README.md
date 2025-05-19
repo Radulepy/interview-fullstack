@@ -1,54 +1,106 @@
-# React + TypeScript + Vite
+## Start & Develop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- **Start dev server:**  
+  ```sh
+  npm run dev
+  ```
+- **Build for production:**  
+  ```sh
+  npm run build
+  ```
+- **Preview production build:**  
+  ```sh
+  npm run preview
+  ```
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Component Example
 
-## Expanding the ESLint configuration
+### Functional Component with Props
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+**Interface (external file):**
+```ts
+// src/components/Demo.types.ts
+export interface DemoProps {
+  title: string;
+  count: number;
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**Component:**
+```tsx
+// src/components/Demo.tsx
+import React from 'react';
+import { DemoProps } from './Demo.types';
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+const Demo: React.FC<DemoProps> = ({ title, count }) => (
+  <div>
+    <h2>{title}</h2>
+    <p>Count: {count}</p>
+  </div>
+);
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+export default Demo;
 ```
+
+**Component:**
+```tsx
+const Demo: React.FC<{ title: string; count: number }> = ({ title, count }) => (
+  <div>
+    <h2>{title}</h2>
+    <p>Count: {count}</p>
+  </div>
+);
+export default Demo;
+```
+
+**Usage:**
+```tsx
+import Demo from './components/Demo';
+
+<Demo title="Demo Title" count={5} />
+```
+
+---
+
+## React Hooks
+
+- **useState**
+  ```tsx
+  const [value, setValue] = useState(initialValue);
+  ```
+- **useEffect**
+  ```tsx
+  useEffect(() => {
+    // side effect
+    return () => {
+      // cleanup
+    };
+  }, [dependencies]);
+  ```
+
+---
+
+## Useful Tricks
+
+- **Conditional rendering:**  
+  ```tsx
+  {isVisible && <span>Visible!</span>}
+  ```
+- **List rendering:**  
+  ```tsx
+  {items.map(item => <div key={item.id}>{item.name}</div>)}
+  ```
+- **Event handler:**  
+  ```tsx
+  <button onClick={() => setCount(count + 1)}>Increment</button>
+  ```
+- **Fetch data:**  
+  ```tsx
+  useEffect(() => {
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(setData);
+  }, []);
+  ```
